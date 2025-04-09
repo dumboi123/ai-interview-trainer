@@ -1,10 +1,23 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import React from "react";
 import Image from "next/image";
-import { dummyInterviews } from "@/constants";
 import InterviewCard from "@/components/InterviewCard";
-const HomePage = () => {
+import { getCurrentUser } from "@/lib/actions/auth.action";
+import {
+  getInterviewsByUserId,
+  getLatestInterviews,
+} from "@/lib/actions/general.action";
+const HomePage = async () => {
+  const user = await getCurrentUser();
+
+  // const [userInterviews, allInterview] = await Promise.all([
+  //   getInterviewsByUserId(user?.id!),
+  //   getLatestInterviews({ userId: user?.id! }),
+  // ]);
+
+  // const hasPastInterviews = userInterviews?.length! > 0;
+  // const hasUpcomingInterviews = allInterview?.length! > 0;
+
   return (
     <>
       <section className="card-cta">
@@ -30,31 +43,6 @@ const HomePage = () => {
       <section className="flex flex-col gap-6 mt-8">
         <h2>Your Interviews</h2>
         <div className="interviews-section">
-          {dummyInterviews.map((interview) => (
-            <InterviewCard
-              key={interview.id}
-              userId={interview.userId}
-              interviewId={interview.id}
-              role={interview.role}
-              type={interview.type}
-              techstack={interview.techstack}
-              createdAt={interview.createdAt}
-            />
-          ))}
-          {/* Uncomment this when the backend is ready */}
-          {/* {userInterviews?.length > 0 ? (
-            userInterviews?.map((interview) => (
-              <InterviewCard
-                key={interview.id}
-                userId={user?.id}
-                interviewId={interview.id}
-                role={interview.role}
-                type={interview.type}
-                techstack={interview.techstack}
-                createdAt={interview.createdAt}
-              />
-            ))
-          ) : ( */}
           {/* {hasPastInterviews ? (
             userInterviews?.map((interview) => (
               <InterviewCard
@@ -68,7 +56,7 @@ const HomePage = () => {
               />
             ))
           ) : ( */}
-          <p>You haven&apos;t taken any interviews yet</p>
+            <p>You haven&apos;t taken any interviews yet</p>
           {/* )} */}
         </div>
       </section>
@@ -76,17 +64,6 @@ const HomePage = () => {
         <h2>Take Interviews</h2>
 
         <div className="interviews-section">
-        {dummyInterviews.map((interview) => (
-            <InterviewCard
-              key={interview.id}
-              userId={interview.userId}
-              interviewId={interview.id}
-              role={interview.role}
-              type={interview.type}
-              techstack={interview.techstack}
-              createdAt={interview.createdAt}
-            />
-          ))}
           {/* {hasUpcomingInterviews ? (
             allInterview?.map((interview) => (
               <InterviewCard
