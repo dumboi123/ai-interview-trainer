@@ -5,6 +5,7 @@ import { google } from "@ai-sdk/google";
 
 import { db } from "@/firebase/admin";
 import { feedbackSchema } from "@/constants";
+import { console } from "inspector";
 
 export async function createFeedback(params: CreateFeedbackParams) {
   const { interviewId, userId, transcript, feedbackId } = params;
@@ -94,7 +95,7 @@ export async function getLatestInterviews(
   params: GetLatestInterviewsParams
 ): Promise<Interview[] | null> {
   const { userId, limit = 20 } = params;
-
+  console.log("userId", userId);
   const interviews = await db
     .collection("interviews")
     .orderBy("createdAt", "desc")
