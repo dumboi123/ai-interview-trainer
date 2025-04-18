@@ -19,6 +19,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
+// Về sau có thể scale lên = getApp(name) để lấy đúng app và initializeApp(config, name) để khởi tạo app mới có name
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 // const analytics = getAnalytics(app);
 
